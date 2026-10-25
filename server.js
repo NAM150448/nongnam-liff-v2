@@ -10,6 +10,7 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(express.static('public'));
+app.use(express.static(__dirname)); // เพิ่มส่วนนี้เพื่อให้เซิร์ฟเวอร์อ่านไฟล์ .html ใน root directory ได้
 
 // ---------------- ตั้งค่า LINE OA ----------------
 const LINE_CHANNEL_ACCESS_TOKEN = 'apoWC0YS2Y164qQsnwGrPv899Dc5sm54AXmxUupCdz68mYMjX354Fi9ZamYEsZxNwfExLtFNZEf9jtzAeF9hl5R6IemodDjYrcQo1Z9wPVpqfvLh+SfS1KHtfZX1EhWeLMyOl4jtnVMo2gn545bpnQdB04t89/1O/w1cDnyilFU=';
