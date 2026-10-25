@@ -18,42 +18,104 @@
   --danger:#ef4444;--success:#16a34a;
   --shadow-sm:0 2px 8px rgba(61,43,31,.06);
   --shadow-md:0 8px 24px rgba(61,43,31,.10);
+  --shadow-lg:0 14px 34px rgba(61,43,31,.16);
   --radius:18px
 }
-body{font-family:'Prompt','Noto Sans Thai',sans-serif;background:var(--bg);color:var(--brand);padding-bottom:110px;font-size:15.5px;min-height:100vh}
-header{background:linear-gradient(135deg,#ff9a4c,#e2531f);color:#fff;padding:24px 18px 30px;border-radius:0 0 28px 28px;display:flex;align-items:center;gap:13px}
-.logo-img{width:54px;height:54px;border-radius:50%;object-fit:cover;border:2.5px solid #fff;background:#fff}
-.title{font-size:20.5px;font-weight:800}.sub{font-size:12.5px;opacity:.92}
-#cartIconBtn{position:relative;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.3);width:44px;height:44px;border-radius:50%;font-size:20px;color:#fff}
-#cartIconBadge{position:absolute;top:-5px;right:-5px;background:var(--teal);color:#fff;font-size:11px;font-weight:800;min-width:19px;height:19px;border-radius:10px;display:none;align-items:center;justify-content:center;padding:0 5px}
-#status{margin:14px 16px 0;padding:13px 15px;border-radius:14px;font-size:14px;font-weight:500}.loading{background:#fff3e6;color:#a5690b}.error{background:#fdecec;color:var(--danger)}
-main{padding:16px}.section-title{font-size:16px;font-weight:800;margin:18px 0 12px}
+html{scroll-behavior:smooth}
+body{font-family:'Prompt','Noto Sans Thai',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:
+  radial-gradient(circle at 100% 0%,#ffe9d1 0%,rgba(255,233,209,0) 45%),
+  radial-gradient(circle at 0% 20%,#d6f5ef 0%,rgba(214,245,239,0) 40%),
+  var(--bg);
+  background-attachment:fixed;color:var(--brand);padding-bottom:110px;font-size:15.5px;min-height:100vh}
+
+header{background:linear-gradient(135deg,#ff9a4c 0%,#ff7a3d 45%,#e2531f 100%);color:#fff;padding:24px 18px 30px;border-radius:0 0 28px 28px;box-shadow:0 10px 30px rgba(226,113,29,.35);display:flex;align-items:center;gap:13px;position:relative;overflow:hidden}
+header::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% -20%,rgba(255,255,255,.35),transparent 55%);pointer-events:none}
+.logo-img{width:54px;height:54px;border-radius:50%;object-fit:cover;border:2.5px solid rgba(255,255,255,.85);background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.18);position:relative;z-index:1}
+.header-text{flex:1;min-width:0;position:relative;z-index:1}.title{font-size:20.5px;font-weight:800;letter-spacing:.2px}.sub{font-size:12.5px;opacity:.92;margin-top:4px;font-weight:500}
+#cartIconBtn{position:relative;background:rgba(255,255,255,.22);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.3);width:44px;height:44px;border-radius:50%;font-size:20px;color:#fff;z-index:1;transition:transform .15s ease,background .15s ease}
+#cartIconBtn:active{transform:scale(.9);background:rgba(255,255,255,.35)}
+#cartIconBadge{position:absolute;top:-5px;right:-5px;background:var(--teal);color:#fff;font-size:11px;font-weight:800;min-width:19px;height:19px;border-radius:10px;display:none;align-items:center;justify-content:center;padding:0 5px;border:2px solid #e2711d;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+
+#status{margin:14px 16px 0;padding:13px 15px;border-radius:14px;font-size:14px;line-height:1.5;font-weight:500;box-shadow:var(--shadow-sm)}.loading{background:#fff3e6;color:#a5690b}.error{background:#fdecec;color:var(--danger);white-space:pre-wrap}
+
+main{padding:16px}.section-title{font-size:16px;font-weight:800;margin:18px 0 12px;display:flex;align-items:center;gap:8px}
 .menu-grid{display:flex;flex-direction:column;gap:12px}
-.menu-card{display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:11px}
+.menu-card{display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:11px;box-shadow:var(--shadow-sm);transition:transform .15s ease,box-shadow .15s ease}
+.menu-card:active{transform:scale(.98)}
 .menu-card img{width:66px;height:66px;object-fit:cover;border-radius:14px;background:var(--line)}
-.info{flex:1;min-width:0}.name{font-weight:700;font-size:16.5px}.price{color:var(--accent-dark);font-weight:700;font-size:14.5px}
-.add-btn{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border:0;padding:10px 18px;border-radius:22px;font-size:14.5px;font-weight:700}
-.soldout{background:#eee!important;color:#999!important;cursor:not-allowed}
-#cartBar{position:fixed;left:14px;right:14px;bottom:14px;background:#3d2b1f;color:#fff;padding:14px 18px;display:none;align-items:center;justify-content:space-between;border-radius:20px}
-#cartBar button{background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;border:0;padding:11px 22px;border-radius:22px;font-weight:700}
-.overlay{position:fixed;inset:0;background:rgba(30,20,12,.5);display:none;align-items:flex-end;z-index:50}.overlay.show{display:flex}
-.sheet{background:#fff;width:100%;max-height:92vh;overflow-y:auto;border-radius:24px 24px 0 0;padding:20px}
-.sheet-head{display:flex;gap:12px;align-items:center;margin-bottom:14px}.sheet-head img{width:62px;height:62px;border-radius:16px;object-fit:cover}.close-x{margin-left:auto;background:#f4ece2;border:0;width:34px;height:34px;border-radius:50%}
+.info{flex:1;min-width:0}.name{font-weight:700;font-size:16.5px}.price{color:var(--accent-dark);font-weight:700;font-size:14.5px;margin-top:3px}
+.add-btn{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border:0;padding:10px 18px;border-radius:22px;font-size:14.5px;font-weight:700;box-shadow:0 4px 12px rgba(226,113,29,.3);transition:transform .12s ease}
+.add-btn:active{transform:scale(.92)}
+.soldout{background:#eee!important;color:#999!important;box-shadow:none!important;cursor:not-allowed}
+
+#cartBar{position:fixed;left:14px;right:14px;bottom:14px;background:linear-gradient(120deg,#3d2b1f,#2a1d14);color:#fff;padding:14px 18px;display:none;align-items:center;justify-content:space-between;box-shadow:0 12px 30px rgba(0,0,0,.28);z-index:40;border-radius:20px}
+#cartBar button{background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;border:0;padding:11px 22px;border-radius:22px;font-weight:700;box-shadow:0 4px 12px rgba(15,181,163,.4)}
+.overlay{position:fixed;inset:0;background:rgba(30,20,12,.5);backdrop-filter:blur(2px);display:none;align-items:flex-end;z-index:50}.overlay.show{display:flex}
+.sheet{background:#fff;width:100%;max-height:92vh;overflow-y:auto;border-radius:24px 24px 0 0;padding:20px;box-shadow:0 -10px 40px rgba(0,0,0,.2)}
+.sheet-head{display:flex;gap:12px;align-items:center;margin-bottom:14px}.sheet-head img{width:62px;height:62px;border-radius:16px;object-fit:cover;background:var(--line)}.close-x{margin-left:auto;background:#f4ece2;border:0;font-size:18px;color:#8a6f5c;width:34px;height:34px;border-radius:50%}
+
 .option-group{margin:18px 0}.option-label{font-weight:700;font-size:14px;margin-bottom:9px}
 .chip-row{display:flex;flex-wrap:wrap;gap:9px}
-.chip{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:9px 16px;font-size:14.5px;cursor:pointer}
-.chip.selected{background:linear-gradient(135deg,var(--accent),var(--accent-dark));border-color:var(--accent-dark);color:#fff;font-weight:700}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:9px 16px;font-size:14.5px;cursor:pointer;user-select:none;transition:all .15s ease;font-weight:600;color:var(--brand-light)}
+.chip.selected{background:linear-gradient(135deg,var(--accent),var(--accent-dark));border-color:var(--accent-dark);color:#fff;font-weight:700;box-shadow:0 4px 10px rgba(226,113,29,.28)}
+.chip.required-empty{border-color:var(--danger);color:var(--danger);background:#fff8f8}.required-note{color:var(--danger);font-size:12.5px;margin-top:6px;font-weight:600}
+
+.topping-row{display:flex;align-items:center;justify-content:space-between;border:1.5px solid var(--line);border-radius:14px;padding:11px 13px;margin-bottom:9px;cursor:pointer;transition:all .15s ease}
+.topping-row.selected{border-color:var(--teal);background:#effaf8}
+.t-name{font-size:15px;font-weight:600}.t-price{font-size:13.5px;color:var(--brand-light)}
+.check{width:21px;height:21px;border-radius:7px;border:1.5px solid var(--line)}
+.topping-row.selected .check{background:var(--teal);border-color:var(--teal);position:relative}
+.topping-row.selected .check::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:800}
+
 .qty-row{display:flex;align-items:center;justify-content:center;gap:20px;margin:20px 0 6px}
-.qty-btn{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:#faf6f0;font-size:18px;font-weight:700}
-.sheet-add-btn,#confirmBtn{width:100%;padding:15px;margin-top:16px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border:0;border-radius:16px;font-size:15.5px;font-weight:800}
+.qty-btn{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:#faf6f0;font-size:18px;font-weight:700;color:var(--accent-dark)}
+.qty-num{font-size:19px;font-weight:800;min-width:26px;text-align:center}
+.sheet-add-btn,#confirmBtn{width:100%;padding:15px;margin-top:16px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border:0;border-radius:16px;font-size:15.5px;font-weight:800;box-shadow:0 6px 18px rgba(226,113,29,.32)}
+
+.cart-line{border-bottom:1px dashed var(--line);padding:12px 0;display:flex;justify-content:space-between;gap:10px}
+.cart-line .d{color:var(--brand-light);font-size:13.5px;margin-top:3px}
+.cart-line .rm{color:var(--danger);font-size:12px;margin-top:5px;cursor:pointer;font-weight:600}
+.cart-line .p{font-weight:800;white-space:nowrap;color:var(--accent-dark)}
+.total-line{display:flex;justify-content:space-between;font-size:18px;font-weight:800;margin:18px 0 8px}
+
 .field-label{display:block;font-size:14px;color:#6b5a48;margin:14px 0 6px;font-weight:700}
-input[type=text],input[type=tel]{width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;font-size:15.5px;background:#fbf8f4}
+input[type=text],input[type=tel]{width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;font-size:15.5px;background:#fbf8f4;font-family:inherit}
+input[type=text]:focus,input[type=tel]:focus{outline:none;border-color:var(--accent)}
+.pay-row{display:flex;gap:9px}.pay-row label{flex:1;display:flex;justify-content:center;border:1.5px solid var(--line);border-radius:14px;padding:12px;cursor:pointer;font-weight:600;transition:all .15s ease}
+.pay-row .active{border-color:var(--accent);background:#fff3e6;color:var(--accent-dark);font-weight:800;box-shadow:0 2px 8px rgba(226,113,29,.15)}
+#slipSection{display:none;margin-top:12px}#slipPreview{max-width:150px;border-radius:12px;margin-top:9px;display:none;border:1px solid var(--line)}
+.bank-box{background:linear-gradient(135deg,#fff3e6,#fdeee0);border:1.5px solid var(--accent);border-radius:16px;padding:14px 15px;margin-bottom:13px}
+.bank-row{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:14.5px}.bank-label{color:var(--brand-light);min-width:64px}.bank-val{font-weight:800;color:var(--brand);flex:1}
+.copy-btn{background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;border:0;padding:6px 11px;border-radius:99px;font-size:12.5px;font-weight:700}
+
+.pricing-note{border-radius:16px!important;box-shadow:var(--shadow-sm)}
+
+#ordersPage{display:none;padding:16px}
+.orders-top{display:flex;align-items:center;gap:10px;margin:2px 0 16px}
+.back-btn{border:0;background:#fff;color:var(--brand);border:1px solid var(--line);border-radius:14px;padding:10px 13px;font-weight:700;box-shadow:var(--shadow-sm)}
+.orders-title{font-size:21px;font-weight:800}.orders-sub{font-size:13px;color:var(--brand-light);margin-top:3px}
+.order-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:13px;box-shadow:var(--shadow-sm);transition:box-shadow .15s ease}
+.order-head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.order-id{font-weight:800;font-size:15px}.order-date{font-size:12.5px;color:var(--brand-light);margin-top:3px}
+.order-total{font-size:18px;font-weight:800;color:var(--accent-dark);white-space:nowrap}
+.order-items{margin-top:11px;border-top:1px dashed var(--line);padding-top:9px}
+.order-item{font-size:14px;padding:5px 0;display:flex;justify-content:space-between;gap:10px}
+.order-detail{font-size:12.5px;color:var(--brand-light);margin-top:1px}
+.badges{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.badge{font-size:12px;padding:6px 10px;border-radius:999px;background:#f4ece2;color:#6b5a48;font-weight:600}
+.badge.status{background:#fff3e6;color:var(--accent-dark)}
+.badge.done{background:#e6f7ee;color:var(--success)}
+.badge.cancel{background:#fdecec;color:var(--danger)}
+.cancel-order-btn{margin-top:12px;width:100%;background:#fff;border:1.5px solid var(--danger);color:var(--danger);border-radius:22px;padding:10px 14px;font-size:13.5px;font-weight:700}
+.empty-orders{background:#fff;border:1.5px dashed var(--line);border-radius:18px;padding:32px 18px;text-align:center;color:var(--brand-light);line-height:1.7}
+.refresh-orders{margin-left:auto;border:0;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:12px;padding:9px 11px;font-weight:700;box-shadow:0 4px 10px rgba(226,113,29,.28)}
+#sortOrdersBtn{font-size:12.5px;white-space:nowrap}
 </style>
 </head>
 <body>
 <header>
-  <img src="logo.png" class="logo-img" alt="โลโก้ร้าน" onerror="this.src='https://via.placeholder.com/54'">
-  <div><div class="title">ร้านน้ำชงน้องน้ำ</div><div class="sub">เลือกเมนู กดสั่งได้เลยค่ะ</div></div>
+  <img src="logo.png" class="logo-img" alt="โลโก้ร้าน">
+  <div class="header-text"><div class="title">ร้านน้ำชงน้องน้ำ</div><div class="sub" id="headerSub">เลือกเมนู กดสั่งได้เลยค่ะ</div></div>
   <button id="cartIconBtn" onclick="openCart()">🛒<span id="cartIconBadge">0</span></button>
 </header>
 
@@ -61,127 +123,165 @@ input[type=text],input[type=tel]{width:100%;padding:13px 14px;border:1.5px solid
 
 <main id="menuSection" style="display:none">
   <h3 class="section-title">เมนูเครื่องดื่ม</h3>
+  <div class="pricing-note" style="margin:10px 0;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fffdf9;color:var(--brand-light);font-size:13px;line-height:1.55">💡 <strong style="color:var(--accent-dark)">ค่าปั่น +5 บาท</strong> สำหรับเมนูทั่วไป ส่วนเมนูเครื่องปั่นราคาที่แสดง <strong style="color:var(--accent-dark)">รวมค่าปั่นแล้ว</strong> เลือกแก้วหรือถุงได้ <strong style="color:var(--accent-dark)">ไม่คิดเพิ่ม</strong></div>
   <div class="menu-grid" id="menuList"></div>
+</main>
+
+<main id="ordersPage">
+  <div class="orders-top">
+    <div><div class="orders-title">คำสั่งซื้อของฉัน</div><div class="orders-sub" id="ordersSub">แสดงคำสั่งซื้อล่าสุดของคุณ</div></div>
+    <button class="refresh-orders" id="sortOrdersBtn" onclick="toggleOrdersSort()" title="สลับลำดับ">↕ ใหม่สุดก่อน</button>
+    <button class="refresh-orders" onclick="loadOrders()">↻</button>
+  </div>
+  <div id="ordersList"></div>
 </main>
 
 <div id="cartBar"><div><span id="cartCount">0</span> รายการ · <b><span id="cartTotal">0</span> บาท</b></div><button onclick="openCart()">ดูตะกร้า</button></div>
 
 <div class="overlay" id="itemOverlay"><div class="sheet">
 <div class="sheet-head"><img id="mImg"><div><div class="name" id="mName"></div><div class="price" id="mPrice"></div></div><button class="close-x" onclick="closeItemModal()">✕</button></div>
-<div class="option-group"><div class="option-label">รูปแบบเครื่องดื่ม</div><div class="chip-row" id="drinkTypeChips"></div></div>
-<div class="option-group"><div class="option-label">บรรจุภัณฑ์</div><div class="chip-row" id="containerChips"></div></div>
+<div class="option-group"><div class="option-label">รูปแบบเครื่องดื่ม <span style="color:#c94b4b">*</span></div><div class="chip-row" id="drinkTypeChips"></div><div class="required-note" id="drinkTypeNote" style="display:none">กรุณาเลือก ปั่น / เย็น / ร้อน</div></div>
+<div class="option-group"><div class="option-label">บรรจุภัณฑ์ <span style="color:#c94b4b">*</span></div><div class="chip-row" id="containerChips"></div><div class="required-note" id="containerNote" style="display:none">กรุณาเลือก แก้ว หรือ ถุง</div></div>
 <div class="option-group"><div class="option-label">ระดับความหวาน</div><div class="chip-row" id="sweetnessChips"></div></div>
+<div class="option-group" id="toppingGroup"><div class="option-label">ท็อปปิ้ง (เลือกได้หลายอย่าง)</div><div id="toppingList"></div></div>
 <div class="option-group"><div class="option-label">จำนวน</div><div class="qty-row"><button class="qty-btn" onclick="changeQty(-1)">−</button><div class="qty-num" id="qtyNum">1</div><button class="qty-btn" onclick="changeQty(1)">+</button></div></div>
 <button class="sheet-add-btn" onclick="addSelectionToCart()">เพิ่มลงตะกร้า · <span id="itemTotalPrice">0</span> บาท</button>
 </div></div>
 
-<div class="overlay" id="cartOverlay"><div class="sheet">
-<div class="sheet-head"><div class="name">ตะกร้าสินค้า</div><button class="close-x" onclick="closeCart()">✕</button></div>
-<div id="cartLines"></div>
-<div style="display:flex;justify-content:space-between;font-weight:800;margin:18px 0 8px"><span>ยอดรวม</span><span><span id="cartModalTotal">0</span> บาท</span></div>
+<div class="overlay" id="cartOverlay"><div class="sheet"><div class="sheet-head"><div class="name">ตะกร้าสินค้า</div><button class="close-x" onclick="closeCart()">✕</button></div><div id="cartLines"></div><div class="total-line"><span>ยอดรวม</span><span><span id="cartModalTotal">0</span> บาท</span></div>
 <label class="field-label">ชื่อผู้รับ *</label><input type="text" id="custName" placeholder="ชื่อ-นามสกุล">
-<label class="field-label">เบอร์โทรศัพท์ *</label><input type="tel" id="custTel" placeholder="0812345678">
-<button id="confirmBtn" onclick="confirmOrder()">ยืนยันคำสั่งซื้อ</button>
+<label class="field-label">เบอร์โทรศัพท์ *</label><input type="tel" id="custTel" placeholder="0812345678" pattern="[0-9]{10}" maxlength="10">
+<label class="field-label">วิธีการชำระเงิน</label><div class="pay-row"><label id="payTransferLabel"><input type="radio" name="paymentMethod" value="โอนเงิน" onchange="onPaymentChange()" style="display:none"><span>💸 โอนเงิน</span></label><label id="payShopLabel" class="active"><input type="radio" name="paymentMethod" value="ชำระที่ร้าน" onchange="onPaymentChange()" checked style="display:none"><span>🏪 ชำระที่ร้าน</span></label></div>
+<div id="slipSection"><div class="bank-box"><div class="bank-row"><span class="bank-label">ธนาคาร</span><span class="bank-val">กสิกรไทย</span></div><div class="bank-row"><span class="bank-label">เลขบัญชี</span><span class="bank-val" id="bankAccNo">202-1-78181-1</span><button type="button" class="copy-btn" onclick="copyBankAcc()">คัดลอก</button></div><div class="bank-row"><span class="bank-label">ชื่อบัญชี</span><span class="bank-val">เนตรนภา บุญอาจ</span></div></div><label class="field-label">แนบสลิปการโอนเงิน</label><input type="file" accept="image/*" onchange="onSlipSelected(event)"><img id="slipPreview"></div><button id="confirmBtn" onclick="confirmOrder()">ยืนยันคำสั่งซื้อ</button>
 </div></div>
 
 <script>
-// ตั้งค่าชี้ไปที่ IP คอมพิวเตอร์ของคุณ (XAMPP)
-const API_URL = 'http://192.168.1.170/nongnam/api.php';
-const LIFF_ID = '2011058922-zZ7LXynR';
+const API_URL = '/api';
+const LIFF_ID = '2011058922-zZ7LXynR'; // ใส่ LIFF ID ของร้าน
 const SWEETNESS_OPTIONS = ['ปกติ','หวานน้อย','หวานมาก','ไม่หวาน'];
 const DRINK_TYPE_OPTIONS = [{value:'เย็น',label:'🧊 เย็น'},{value:'ปั่น',label:'🥤 ปั่น'},{value:'ร้อน',label:'🔥 ร้อน'}];
 const CONTAINER_OPTIONS = [{value:'แก้ว',label:'🥤 แก้ว'},{value:'ถุง',label:'🛍️ ถุง'}];
-let cart=[], profile=null, currentItem=null, currentDrinkType='', currentContainer='', currentSweetness=SWEETNESS_OPTIONS[0], currentQty=1;
+const BANK_ACCOUNT_NO = '2021781811';
+let cart=[],profile=null,slipBase64=null,toppingsData=[],currentItem=null,currentDrinkType='',currentContainer='',currentSweetness=SWEETNESS_OPTIONS[0],currentToppings=[],currentQty=1;
+let rawOrders=[],ordersSortDesc=true;
 
-function setStatus(text, type){ const e=document.getElementById('status'); e.textContent=text; e.className=type||''; e.style.display=text?'block':'none'; }
+function isOrdersPage(){
+  const p=new URLSearchParams(location.search).get('page');
+  return p==='orders'||p==='order'||location.hash==='#orders';
+}
+function setStatus(text,type){const e=document.getElementById('status');e.textContent=text;e.className=type||'';e.style.display=text?'block':'none'}
 
 async function init(){
   try{
     setStatus('กำลังเชื่อมต่อ LINE...','loading');
-    await liff.init({liffId: LIFF_ID});
-    if(!liff.isLoggedIn()){ liff.login(); return; }
-    profile = await liff.getProfile();
-    await loadMenu();
-  }catch(err){
-    profile = { userId: 'GUEST_USER', displayName: 'ลูกค้าทดสอบ' };
-    await loadMenu();
-  }
+    await liff.init({liffId:LIFF_ID});
+    if(!liff.isLoggedIn()){liff.login();return}
+    profile=await liff.getProfile();
+    if(isOrdersPage()){showOrdersPage();await loadOrders()}
+    else await loadMenu();
+  }catch(err){setStatus('เกิดข้อผิดพลาดในการเชื่อมต่อ LINE\n'+(err.message||err),'error')}
 }
 
-async function loadMenu(){
+function showOrdersPage(){
+  document.getElementById('menuSection').style.display='none';
+  document.getElementById('ordersPage').style.display='block';
+  document.getElementById('cartIconBtn').style.display='none';
+  document.getElementById('headerSub').textContent='ตรวจสอบคำสั่งซื้อของคุณ';
+  document.getElementById('cartBar').style.display='none';
+}
+function escapeHtml(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function formatDateThai(v){
+  if(!v)return '-';
+  const d=new Date(v);
+  if(isNaN(d.getTime()))return String(v);
+  return d.toLocaleString('th-TH',{dateStyle:'medium',timeStyle:'short'});
+}
+function normalizeToppings(t){
+  if(Array.isArray(t))return t.map(x=>typeof x==='string'?x:(x&&x.name)||'').filter(Boolean).join(', ');
+  return String(t||'').trim();
+}
+function renderOrders(orders){
+  const el=document.getElementById('ordersList');
+  if(!orders||!orders.length){el.innerHTML='<div class="empty-orders">🧋<br><b>ยังไม่พบคำสั่งซื้อ</b><br>เมื่อคุณสั่งเครื่องดื่มแล้ว รายการจะปรากฏที่นี่</div>';return}
+  el.innerHTML=orders.map(o=>{
+    const items=Array.isArray(o.items)?o.items:[];
+    const itemHtml=items.length?items.map(it=>{
+      const qty=Number(it.qty||1), name=escapeHtml(it.name||'รายการ');
+      const details=[it.drinkType,it.container,it.sweetness,normalizeToppings(it.toppings)].filter(Boolean).map(escapeHtml).join(' · ');
+      const price=Number(it.subtotal||it.price||0);
+      return '<div class="order-item"><div><b>'+name+' × '+qty+'</b>'+(details?'<div class="order-detail">'+details+'</div>':'')+'</div><div>'+price.toLocaleString()+' บาท</div></div>';
+    }).join(''):'<div class="order-detail">ไม่มีรายละเอียดสินค้า</div>';
+    const rawStatus=String(o.orderStatus||'');
+    const orderStatus=escapeHtml(rawStatus||'-'), paymentStatus=escapeHtml(o.paymentStatus||'-');
+    const done=/เสร็จ|สำเร็จ|รับแล้ว|completed|done/i.test(rawStatus)&&rawStatus!=='รอยืนยันการยกเลิก';
+    const isCancelled=rawStatus==='ยกเลิกแล้ว';
+    const isCancelPending=rawStatus==='รอยืนยันการยกเลิก';
+    const statusBadgeClass=isCancelled||isCancelPending?'cancel':(done?'done':'status');
+    const cancelBtn=o.canCancel?'<button class="cancel-order-btn" onclick="requestCancel(\''+escapeHtml(o.orderId)+'\')">ยกเลิกคำสั่งซื้อ</button>':'';
+    return '<div class="order-card"><div class="order-head"><div><div class="order-id">เลขที่ '+escapeHtml(o.orderId||'-')+'</div><div class="order-date">'+formatDateThai(o.timestamp)+'</div></div><div class="order-total">'+Number(o.totalPrice||0).toLocaleString()+' บาท</div></div><div class="order-items">'+itemHtml+'</div><div class="badges"><span class="badge '+statusBadgeClass+'">สถานะ: '+orderStatus+'</span><span class="badge">ชำระเงิน: '+paymentStatus+'</span><span class="badge">'+escapeHtml(o.paymentMethod||'')+'</span></div>'+cancelBtn+'</div>';
+  }).join('');
+}
+async function requestCancel(orderId){
+  if(!confirm('ยืนยันขอยกเลิกคำสั่งซื้อ '+orderId+' ใช่หรือไม่?\n(ร้านค้าจะต้องยืนยันการยกเลิกอีกครั้ง)'))return;
   try{
-    setStatus('กำลังโหลดเมนู...','loading');
-    const res = await fetch(API_URL + '?action=getMenu', {cache:'no-store'});
-    const json = await res.json();
-    if(!json.ok) throw new Error(json.error);
-    const menu = json.data.menu || [];
-    document.getElementById('menuList').innerHTML = menu.map(m => {
-      const ok = !m.status || m.status === 'available';
-      return `<div class="menu-card">
-        ${m.img ? `<img src="${m.img}">` : ''}
-        <div class="info"><div class="name">${m.name}</div><div class="price">${m.price} บาท</div></div>
-        ${ok ? `<button class="add-btn" onclick='openItemModal(${JSON.stringify(m)})'>เลือก</button>` : `<button class="add-btn soldout" disabled>หมด</button>`}
-      </div>`;
-    }).join('');
-    document.getElementById('menuSection').style.display = 'block';
+    const res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'requestCancelOrder',orderId:orderId,userId:profile&&profile.userId})});
+    const j=await res.json();
+    if(!j.ok)throw new Error(j.error||'ขอยกเลิกไม่สำเร็จ');
+    alert('ส่งคำขอยกเลิกแล้ว กรุณารอร้านค้ายืนยันค่ะ');
+    await loadOrders();
+  }catch(e){alert('เกิดข้อผิดพลาด: '+(e.message||e))}
+}
+async function loadOrders(){
+  if(!profile||!profile.userId){setStatus('ไม่พบข้อมูลผู้ใช้ LINE','error');return}
+  try{
+    setStatus('กำลังโหลดคำสั่งซื้อ...','loading');
+    const url=API_URL+'?action=getOrdersByUser&userId='+encodeURIComponent(profile.userId)+'&_='+Date.now();
+    const res=await fetch(url,{cache:'no-store'});
+    if(!res.ok)throw new Error('HTTP Error '+res.status);
+    const j=await res.json();
+    if(!j.ok)throw new Error(j.error||'โหลดคำสั่งซื้อไม่สำเร็จ');
+    rawOrders=Array.isArray(j.data)?j.data:[];
+    renderSortedOrders();
     setStatus('','');
-  }catch(err){ setStatus('โหลดเมนูไม่สำเร็จ: ' + err.message, 'error'); }
+  }catch(e){setStatus('โหลดคำสั่งซื้อไม่สำเร็จ: '+(e.message||e),'error')}
+}
+function renderSortedOrders(){
+  const ordered=ordersSortDesc?rawOrders:[...rawOrders].reverse();
+  renderOrders(ordered);
+  const btn=document.getElementById('sortOrdersBtn');
+  if(btn)btn.textContent=ordersSortDesc?'↕ ใหม่สุดก่อน':'↕ เก่าสุดก่อน';
+  const sub=document.getElementById('ordersSub');
+  if(sub)sub.textContent=ordersSortDesc?'แสดงคำสั่งซื้อล่าสุดของคุณ':'แสดงคำสั่งซื้อเก่าสุดของคุณก่อน';
+}
+function toggleOrdersSort(){
+  ordersSortDesc=!ordersSortDesc;
+  renderSortedOrders();
+}
+function copyBankAcc(){
+  const done=()=>{const b=document.querySelector('.copy-btn');if(b){const old=b.textContent;b.textContent='คัดลอกแล้ว ✓';setTimeout(()=>b.textContent=old,1500)}};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(BANK_ACCOUNT_NO).then(done).catch(()=>{})}
 }
 
-function openItemModal(item){
-  currentItem = item; currentDrinkType = 'เย็น'; currentContainer = 'แก้ว'; currentSweetness = SWEETNESS_OPTIONS[0]; currentQty = 1;
-  document.getElementById('mImg').src = item.img || ''; document.getElementById('mName').textContent = item.name; document.getElementById('mPrice').textContent = item.price + ' บาท';
-  document.getElementById('drinkTypeChips').innerHTML = DRINK_TYPE_OPTIONS.map(o => `<div class="chip ${o.value==='เย็น'?'selected':''}" onclick="currentDrinkType='${o.value}'">${o.label}</div>`).join('');
-  document.getElementById('containerChips').innerHTML = CONTAINER_OPTIONS.map(o => `<div class="chip ${o.value==='แก้ว'?'selected':''}" onclick="currentContainer='${o.value}'">${o.label}</div>`).join('');
-  document.getElementById('sweetnessChips').innerHTML = SWEETNESS_OPTIONS.map(s => `<div class="chip ${s===currentSweetness?'selected':''}" onclick="currentSweetness='${s}'">${s}</div>`).join('');
-  document.getElementById('qtyNum').textContent = 1; updateItemTotalDisplay();
-  document.getElementById('itemOverlay').classList.add('show');
-}
-
-function closeItemModal(){ document.getElementById('itemOverlay').classList.remove('show'); }
-function changeQty(d){ currentQty = Math.max(1, currentQty + d); document.getElementById('qtyNum').textContent = currentQty; updateItemTotalDisplay(); }
-function updateItemTotalDisplay(){ document.getElementById('itemTotalPrice').textContent = Number(currentItem.price||0) * currentQty; }
-
-function addSelectionToCart(){
-  const unitPrice = Number(currentItem.price||0);
-  cart.push({ id: currentItem.id, name: currentItem.name, drinkType: currentDrinkType, container: currentContainer, sweetness: currentSweetness, qty: currentQty, unitPrice, subtotal: unitPrice * currentQty });
-  closeItemModal(); renderCartBar();
-}
-
-function cartTotal(){ return cart.reduce((s,c) => s + c.subtotal, 0); }
-
-function renderCartBar(){
-  const count = cart.reduce((s,c) => s + c.qty, 0);
-  document.getElementById('cartIconBadge').textContent = count;
-  document.getElementById('cartIconBadge').style.display = count > 0 ? 'flex' : 'none';
-  if(!cart.length){ document.getElementById('cartBar').style.display = 'none'; return; }
-  document.getElementById('cartBar').style.display = 'flex';
-  document.getElementById('cartCount').textContent = count;
-  document.getElementById('cartTotal').textContent = cartTotal();
-}
-
-function openCart(){
-  document.getElementById('cartLines').innerHTML = cart.map((c,i) => `<div><b>${c.name} x${c.qty}</b> (${c.drinkType}, ${c.container}, ${c.sweetness}) - ${c.subtotal} บาท</div>`).join('');
-  document.getElementById('cartModalTotal').textContent = cartTotal();
-  document.getElementById('cartOverlay').classList.add('show');
-}
-function closeCart(){ document.getElementById('cartOverlay').classList.remove('show'); }
-
-async function confirmOrder(){
-  const name = document.getElementById('custName').value.trim();
-  const tel = document.getElementById('custTel').value.trim();
-  if(!name || !tel) return alert('กรุณากรอกข้อมูลให้ครบ');
-  
-  const btn = document.getElementById('confirmBtn'); btn.disabled = true; btn.textContent = 'กำลังส่ง...';
-  try{
-    const res = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'createOrder', userId: profile ? profile.userId : '', name, telephone: tel, items: cart, totalPrice: cartTotal() }) });
-    const j = await res.json(); if(!j.ok) throw new Error(j.error);
-    alert('สั่งซื้อสำเร็จ! 🎉'); cart = []; closeCart(); renderCartBar();
-    if(liff.closeWindow) liff.closeWindow();
-  }catch(e){ alert('เกิดข้อผิดพลาด: ' + e.message); }
-  finally{ btn.disabled = false; btn.textContent = 'ยืนยันคำสั่งซื้อ'; }
-}
-
+async function loadMenu(){try{setStatus('กำลังโหลดเมนู...','loading');const res=await fetch(API_URL+'?action=getMenu',{cache:'no-store'});const json=await res.json();if(!json.ok)throw new Error(json.error);const menu=json.data.menu||[];toppingsData=(json.data.toppings||[]).filter(t=>!t.status||t.status==='available');document.getElementById('menuList').innerHTML=menu.map(m=>{const ok=!m.status||m.status==='available';return `<div class="menu-card">${m.img?`<img src="${m.img}" alt="${m.name}" onerror="this.style.display='none'">`:''}<div class="info"><div class="name">${m.name}</div><div class="price">${m.price} บาท</div></div>${ok?`<button class="add-btn" onclick='openItemModal(${JSON.stringify(m)})'>เลือก</button>`:`<button class="add-btn soldout" disabled>หมด</button>`}</div>`}).join('');document.getElementById('menuSection').style.display='block';setStatus('','')}catch(err){setStatus('โหลดเมนูไม่สำเร็จ: '+err.message,'error')}}
+function isBlenderItem(item){const c=String(item?.category||'').trim().toLowerCase();return ['เครื่องปั่น','เครื่องปั่นเฉพาะ','เมนูเครื่องปั่น','ปั่นเฉพาะ','blender'].includes(c)}
+function openItemModal(item){currentItem=item;currentDrinkType='';currentContainer='';currentSweetness=SWEETNESS_OPTIONS[0];currentToppings=[];currentQty=1;const blender=isBlenderItem(item);document.getElementById('mImg').src=item.img||'';document.getElementById('mImg').style.display=item.img?'block':'none';document.getElementById('mName').textContent=item.name;document.getElementById('mPrice').textContent=item.price+' บาท';const drinkGroup=document.getElementById('drinkTypeChips').closest('.option-group');drinkGroup.style.display=blender?'none':'block';document.getElementById('drinkTypeChips').innerHTML=DRINK_TYPE_OPTIONS.map(o=>`<div class="chip" data-type="${o.value}" onclick="selectDrinkType('${o.value}')">${o.label}</div>`).join('');document.getElementById('containerChips').innerHTML=CONTAINER_OPTIONS.map(o=>`<div class="chip" data-container="${o.value}" onclick="selectContainer('${o.value}')">${o.label}</div>`).join('');document.getElementById('sweetnessChips').innerHTML=SWEETNESS_OPTIONS.map(s=>`<div class="chip ${s===currentSweetness?'selected':''}" data-s="${s}" onclick="selectSweetness('${s}')">${s}</div>`).join('');const tg=document.getElementById('toppingGroup');tg.style.display=toppingsData.length?'block':'none';if(toppingsData.length)document.getElementById('toppingList').innerHTML=toppingsData.map(t=>`<div class="topping-row" data-id="${t.id}" onclick="toggleTopping('${t.id}')"><div><div class="t-name">${t.name}</div><div class="t-price">+${t.price} บาท</div></div><div class="check"></div></div>`).join('');document.getElementById('drinkTypeNote').style.display='none';document.getElementById('containerNote').style.display='none';document.getElementById('qtyNum').textContent=1;updateItemTotalDisplay();document.getElementById('itemOverlay').classList.add('show')}
+function closeItemModal(){document.getElementById('itemOverlay').classList.remove('show')}
+function selectDrinkType(v){currentDrinkType=v;document.querySelectorAll('#drinkTypeChips .chip').forEach(c=>{c.classList.toggle('selected',c.dataset.type===v);c.classList.remove('required-empty')});document.getElementById('drinkTypeNote').style.display='none';updateItemTotalDisplay()}
+function selectContainer(v){currentContainer=v;document.querySelectorAll('#containerChips .chip').forEach(c=>{c.classList.toggle('selected',c.dataset.container===v);c.classList.remove('required-empty')});document.getElementById('containerNote').style.display='none';updateItemTotalDisplay()}
+function selectSweetness(v){currentSweetness=v;document.querySelectorAll('#sweetnessChips .chip').forEach(c=>c.classList.toggle('selected',c.dataset.s===v))}
+function toggleTopping(id){const i=currentToppings.findIndex(t=>t.id===id);if(i>=0)currentToppings.splice(i,1);else{const t=toppingsData.find(t=>t.id===id);if(t)currentToppings.push(t)}document.querySelectorAll('.topping-row').forEach(r=>r.classList.toggle('selected',currentToppings.some(t=>t.id===r.dataset.id)));updateItemTotalDisplay()}
+function changeQty(d){currentQty=Math.max(1,currentQty+d);document.getElementById('qtyNum').textContent=currentQty;updateItemTotalDisplay()}
+function calcUnitPrice(){const blender=isBlenderItem(currentItem),toppingExtra=currentToppings.reduce((s,t)=>s+Number(t.price||0),0);if(blender)return Number(currentItem.price||0)+toppingExtra;return Number(currentItem.price||0)+Math.max(currentDrinkType==='ปั่น'?5:0,currentContainer==='ถุง'?5:0)+toppingExtra}
+function updateItemTotalDisplay(){document.getElementById('itemTotalPrice').textContent=calcUnitPrice()*currentQty}
+function addSelectionToCart(){const blender=isBlenderItem(currentItem);if(!blender&&!currentDrinkType){document.getElementById('drinkTypeNote').style.display='block';document.querySelectorAll('#drinkTypeChips .chip').forEach(c=>c.classList.add('required-empty'));return}if(!currentContainer){document.getElementById('containerNote').style.display='block';document.querySelectorAll('#containerChips .chip').forEach(c=>c.classList.add('required-empty'));return}const unitPrice=calcUnitPrice();cart.push({id:currentItem.id,name:currentItem.name,category:currentItem.category||'',basePrice:Number(currentItem.price||0),drinkType:blender?'ปั่น':currentDrinkType,container:currentContainer,containerExtra:currentContainer==='ถุง'?5:0,sweetness:currentSweetness,toppings:[...currentToppings],qty:currentQty,unitPrice,subtotal:unitPrice*currentQty});closeItemModal();renderCartBar()}
+function cartTotal(){return cart.reduce((s,c)=>s+c.subtotal,0)}
+function renderCartBar(){const bar=document.getElementById('cartBar'),count=cart.reduce((s,c)=>s+c.qty,0),badge=document.getElementById('cartIconBadge');if(count>0){badge.textContent=count;badge.style.display='flex'}else badge.style.display='none';if(!cart.length){bar.style.display='none';return}bar.style.display='flex';document.getElementById('cartCount').textContent=count;document.getElementById('cartTotal').textContent=cartTotal()}
+function openCart(){renderCartLines();document.getElementById('cartOverlay').classList.add('show')}function closeCart(){document.getElementById('cartOverlay').classList.remove('show')}
+function renderCartLines(){const el=document.getElementById('cartLines');if(!cart.length)el.innerHTML='<div class="order-detail">ยังไม่มีรายการในตะกร้า</div>';else el.innerHTML=cart.map((c,i)=>{const d=[c.drinkType,c.container,c.sweetness,c.toppings.map(t=>t.name).join(', ')].filter(Boolean).join(' · ');return `<div class="cart-line"><div><b>${c.name} × ${c.qty}</b><div class="d">${d}</div><div class="rm" onclick="removeItem(${i})">ลบรายการนี้</div></div><div class="p">${c.subtotal} บาท</div></div>`}).join('');document.getElementById('cartModalTotal').textContent=cartTotal()}
+function removeItem(i){cart.splice(i,1);renderCartLines();renderCartBar();if(!cart.length)closeCart()}
+function onPaymentChange(){const m=document.querySelector('input[name="paymentMethod"]:checked').value;document.getElementById('slipSection').style.display=m==='โอนเงิน'?'block':'none';document.getElementById('payTransferLabel').classList.toggle('active',m==='โอนเงิน');document.getElementById('payShopLabel').classList.toggle('active',m==='ชำระที่ร้าน')}
+function onSlipSelected(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=x=>{slipBase64=x.target.result;const p=document.getElementById('slipPreview');p.src=slipBase64;p.style.display='block'};r.readAsDataURL(f)}
+async function confirmOrder(){if(!cart.length)return alert('กรุณาเลือกเมนูก่อนยืนยันคำสั่งซื้อ');const name=document.getElementById('custName').value.trim(),tel=document.getElementById('custTel').value.trim();if(!name)return alert('กรุณากรอกชื่อผู้รับ');if(!tel)return alert('กรุณากรอกเบอร์โทรศัพท์ 10 หลัก');const phoneRegex=/^[0-9]{10}$/;if(!phoneRegex.test(tel))return alert('กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง (ตัวเลข 10 หลัก)');const method=document.querySelector('input[name="paymentMethod"]:checked').value;if(method==='โอนเงิน'&&!slipBase64)return alert('กรุณาแนบสลิปการโอนเงิน');const btn=document.getElementById('confirmBtn');btn.disabled=true;btn.textContent='กำลังส่งคำสั่งซื้อ...';const items=cart.map(c=>({id:c.id,name:c.name,category:c.category,basePrice:c.basePrice,drinkType:c.drinkType,container:c.container,containerExtra:c.containerExtra,sweetness:c.sweetness,toppings:c.toppings.map(t=>t.name).join(', '),qty:c.qty,price:c.unitPrice,subtotal:c.subtotal}));try{const res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'createOrder',userId:profile.userId,name,telephone:tel,items,totalPrice:cartTotal(),paymentMethod:method,image:method==='โอนเงิน'?slipBase64:null})});const j=await res.json();if(!j.ok)throw new Error(j.error||'สั่งซื้อไม่สำเร็จ');alert('สั่งซื้อสำเร็จ! 🎉');cart=[];slipBase64=null;closeCart();renderCartBar();if(liff.closeWindow)liff.closeWindow()}catch(e){alert('เกิดข้อผิดพลาด: '+e.message)}finally{btn.disabled=false;btn.textContent='ยืนยันคำสั่งซื้อ'}}
 init();
 </script>
 </body>
